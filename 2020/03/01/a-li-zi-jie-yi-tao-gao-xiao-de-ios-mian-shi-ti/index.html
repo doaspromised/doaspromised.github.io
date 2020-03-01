@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="OC本质- Category, iOS, Swift, OC, ReactNative, js">
+    <meta name="keywords" content="阿里、字节：一套高效的iOS面试题, iOS, Swift, OC, ReactNative, js">
     <meta name="description" content="iOS开发">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -13,7 +13,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>OC本质- Category | 夜空中最亮的星</title>
+    <title>阿里、字节：一套高效的iOS面试题 | 夜空中最亮的星</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -303,12 +303,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/15.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/6.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">OC本质- Category</h1>
+                    <h1 class="description center-align post-title">阿里、字节：一套高效的iOS面试题</h1>
                 </div>
             </div>
         </div>
@@ -425,12 +425,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/OC%E6%9C%AC%E8%B4%A8/">
-                                <span class="chip bg-color">OC本质</span>
-                            </a>
-                        
-                            <a href="/tags/Category/">
-                                <span class="chip bg-color">Category</span>
+                            <a href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/">
+                                <span class="chip bg-color">面试题</span>
                             </a>
                         
                     </div>
@@ -441,8 +437,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/OC%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86/" class="post-category">
-                                OC底层原理
+                            <a href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/" class="post-category">
+                                面试题
                             </a>
                         
                     </div>
@@ -463,14 +459,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.3k
+                    2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    4 分
+                    7 分
                 </div>
                 
 
@@ -486,111 +482,166 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Category"><a href="#Category" class="headerlink" title="Category"></a>Category</h1><h3 id="1、-分类的使用场合"><a href="#1、-分类的使用场合" class="headerlink" title="1、 分类的使用场合"></a>1、 分类的使用场合</h3><ul>
-<li>模块化类</li>
+                <h1 id="阿里、字节：一套高效的iOS面试题"><a href="#阿里、字节：一套高效的iOS面试题" class="headerlink" title="阿里、字节：一套高效的iOS面试题"></a>阿里、字节：一套高效的iOS面试题</h1><p>这是在<a href="https://mp.weixin.qq.com/s/bDnsaD__ZpdHIk3_So382w" target="_blank" rel="noopener">知识小集</a>看到的一套面试题，其中大部分都是大厂面试或者面试其他人用到的，能命中大部分的面试和日常工作，更希望你可以用它来检验自己</p>
+<h2 id="runtime相关问题"><a href="#runtime相关问题" class="headerlink" title="runtime相关问题"></a>runtime相关问题</h2><p>runtime是iOS开发最核心的知识了，如果下面的问题都解决了，那么对runtime的理解已经很深了。<br>runtime已经开源了，这有一份别人调试好可运行的源码objc-runtime，也可以去官网找objc4</p>
+<p><a href="https://github.com/RetVal/objc-runtime" target="_blank" rel="noopener">objc-runtime地址</a></p>
+<p><a href="https://opensource.apple.com/tarballs/objc4/" target="_blank" rel="noopener">objc4地址</a></p>
+<h3 id="结构模型"><a href="#结构模型" class="headerlink" title="结构模型"></a>结构模型</h3><ul>
+<li>介绍下runtime的内存模型（isa、对象、类、metaclass、结构体的存储信息等）</li>
+<li>为什么要设计metaclass</li>
+<li>class_copyIvarList &amp; class_copyPropertyList区别</li>
+<li>class_rw_t 和 class_ro_t 的区别</li>
+<li>category如何被加载的,两个category的load方法的加载顺序，两个category的同名方法的加载顺序</li>
+<li>category &amp; extension区别，能给NSObject添加Extension吗，结果如何<br>消息转发机制，消息转发机制和其他语言的消息机制优劣对比</li>
+<li>在方法调用的时候，方法查询-&gt; 动态解析-&gt; 消息转发 之前做了什么</li>
+<li>IMP、SEL、Method的区别和使用场景</li>
+<li>load、initialize方法的区别什么？在继承关系中他们有什么区别</li>
+<li>说说消息转发机制的优劣</li>
 </ul>
-<h3 id="2、分类的实现原理"><a href="#2、分类的实现原理" class="headerlink" title="2、分类的实现原理"></a>2、分类的实现原理</h3><ul>
-<li>分类编译之后的底层结构是 struct categoty_t, 里面存储着分类的对象方法，类方法，属性，协议信息</li>
-<li>在程序运行的时候，runtime会将category的数据，合并到类的信息中（类对象、元类对象）</li>
+<h3 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h3><ul>
+<li>weak的实现原理？SideTable的结构是什么样的</li>
+<li>关联对象的应用？系统如何实现关联对象的</li>
+<li>关联对象的如何进行内存管理的？关联对象如何实现weak属性</li>
+<li>Autoreleasepool的原理？所使用的的数据结构是什么</li>
+<li>ARC的实现原理？ARC下对retain &amp; release做了哪些优化</li>
+<li>ARC下哪些情况会造成内存泄漏</li>
 </ul>
-<h3 id="3、分类和类扩展的区别"><a href="#3、分类和类扩展的区别" class="headerlink" title="3、分类和类扩展的区别"></a>3、分类和类扩展的区别</h3><ul>
-<li>Class Extension 在编译的时候，它的数据就已经包含在类信息中</li>
-<li>Category 是在运行时，才会将数据合并到类信息中。</li>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><ul>
+<li>Method Swizzle注意事项</li>
+<li>属性修饰符atomic的内部实现是怎么样的?能保证线程安全吗</li>
+<li>iOS 中内省的几个方法有哪些？内部实现原理是什么</li>
+<li>class、objc_getClass、object_getclass 方法有什么区别?</li>
 </ul>
-<p>other flags<br>-Objc 编译器参数  链接的时候把静态库的分类合并到类信息中去。</p>
-<p>remethodizeClass {<br>    // cls 类对象  cats 分类<br>    attchCategories(cls, cats, cache);</p>
-<p>}</p>
-<p>attchCategories {<br>1、 组合所有分类方法<br>2、重新分配内存（扩容）<br>3.、memoremove： 内存挪动<br>4、memcopy： 内存拷贝<br>}</p>
-<p>后参与编译的分类，在方法列表的最前面</p>
-<p>类扩展里面的东西编译的时候就合并到类里面去了，帮助我们私有化类扩展里面的东西<br>分类是在运行时</p>
-<h3 id="4、load方法"><a href="#4、load方法" class="headerlink" title="4、load方法"></a>4、load方法</h3><ul>
-<li><p>分类也有+ load方法</p>
-</li>
-<li><p><strong>load方法是通过函数指针，找到 load 方法 直接调用的，不是通过 objc_msgSend, 所以， 就跟顺序没有关系了</strong></p>
-</li>
-<li><p>+load 方法会在runtime加载<strong>类</strong>、<strong>分类</strong>时调用，而且只调用一次</p>
-</li>
-<li><p>不管用不用类或者分类，都会先执行 load 方法，把类载进内存</p>
-</li>
-<li><p>load 方法是直接被找到进行调用 不存在分类load方法会覆盖类的load方法。</p>
-</li>
-<li><p>普通方法之所以优先调用分类的方法，是因为走的是消息转发机制， objc_msgSend</p>
-</li>
-<li><p>load方法的调用顺序：</p>
+<h2 id="NSNotification相关"><a href="#NSNotification相关" class="headerlink" title="NSNotification相关"></a>NSNotification相关</h2><p>苹果并没有开源相关代码，但是可以读下GNUStep的源码，基本上实现方式很具有参考性<br><a href="https://github.com/gnustep/libs-base" target="_blank" rel="noopener">GNUStep地址</a></p>
 <ul>
-<li>1、先调用<strong>类</strong>的 + load 方法<ul>
-<li>先调用父类的load的方法，在调用子类的 load 方法</li>
-<li>先编译的类，先加载 load 方法</li>
+<li>实现原理（结构设计、通知如何存储的、name&amp;observer&amp;SEL之间的关系等）</li>
+<li>通知的发送时同步的，还是异步的</li>
+<li>NSNotificationCenter接受消息和发送消息是在一个线程里吗？如何异步发送消息</li>
+<li>NSNotificationQueue是异步还是同步发送？在哪个线程响应</li>
+<li>NSNotificationQueue和runloop的关系</li>
+<li>如何保证通知接收的线程在主线程</li>
+<li>页面销毁时不移除通知会崩溃吗</li>
+<li>多次添加同一个通知会是什么结果？多次移除通知呢</li>
+<li>下面的方式能接收到通知吗？为什么<pre><code>// 发送通知
+[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleNotification:) name:@"TestNotification" object:@1];
+// 接收通知
+[NSNotificationCenter.defaultCenter postNotificationName:@"TestNotification" object:nil];</code></pre></li>
 </ul>
-</li>
-<li>2、再调用子类的 + load 方法<ul>
-<li>先编译的<strong>子类</strong>，先加载 load 方法</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><strong>面试题： Category中有 load 方法吗？load 方法是什么时候调用？ load 方法能继承吗？</strong></p>
+<h2 id="Runloop-amp-KVO"><a href="#Runloop-amp-KVO" class="headerlink" title="Runloop &amp; KVO"></a>Runloop &amp; KVO</h2><h3 id="runloop"><a href="#runloop" class="headerlink" title="runloop"></a>runloop</h3><p>runloop对于一个标准的iOS开发来说都不陌生，应该说熟悉runloop是标配，下面就随便列几个典型问题吧</p>
 <ul>
-<li>有</li>
-<li>load 方法在runtime 加载类、分类的时候调用</li>
-<li>可以继承，但是一般情况下不会主动去调用load方法，都是系统自动去调用</li>
+<li>app如何接收到触摸事件的</li>
+<li>为什么只有主线程的runloop是开启的</li>
+<li>为什么只在主线程刷新UI</li>
+<li>PerformSelector和runloop的关系</li>
+<li>如何使线程保活</li>
 </ul>
-</li>
-</ul>
-<h3 id="5、initialize-方法"><a href="#5、initialize-方法" class="headerlink" title="5、initialize 方法"></a>5、initialize 方法</h3><ul>
-<li><p>initialize 方法在类第一次接收到<strong>消息</strong>时调用</p>
-</li>
-<li><p><strong>initialize 方法的调用是通过消息机制，objc_msgSend 调用的</strong></p>
-</li>
-<li><p>调用顺序：</p>
+<h3 id="KVO"><a href="#KVO" class="headerlink" title="KVO"></a>KVO</h3><p>同runloop一样，这也是标配的知识点了，同样列出几个典型问题</p>
 <ul>
-<li>在调用子类的initialize 之前，先调用父类的 initialize, 如果父类的 initialize 之前已经调用过了， 就不再调用了。</li>
-<li>如果子类没有实现initialiaze方法，则会调用父类的initialize（<strong>所以 父类的initialize 可能会被调用多次</strong>）</li>
+<li>实现原理</li>
+<li>如何手动关闭kvo</li>
+<li>通过KVC修改属性会触发KVO么</li>
+<li>哪些情况下使用kvo会崩溃，怎么防护崩溃</li>
+<li>kvo的优缺点</li>
 </ul>
-<p>objc_msgSend 底层是通过汇编实现，不是C语言，就是半开源了</p>
-</li>
+<h2 id="Block"><a href="#Block" class="headerlink" title="Block"></a>Block</h2><ul>
+<li>block的内部实现，结构体是什么样的</li>
+<li>block是类吗，有哪些类型</li>
+<li>一个int变量被 __block 修饰与否的区别？block的变量截获</li>
+<li>block在修改NSMutableArray，需不需要添加__block</li>
+<li>怎么进行内存管理的</li>
+<li>block可以用strong修饰吗</li>
+<li>解决循环引用时为什么要用<strong>strong、</strong>weak修饰</li>
+<li>block发生copy时机</li>
+<li>Block访问对象类型的auto变量时，在ARC和MRC下有什么区别</li>
 </ul>
-<h3 id="6、load-和-initialize-对比"><a href="#6、load-和-initialize-对比" class="headerlink" title="6、load 和 initialize 对比"></a>6、load 和 initialize 对比</h3><h4 id="（1）-load、initialize-方法的区别是什么？"><a href="#（1）-load、initialize-方法的区别是什么？" class="headerlink" title="（1） load、initialize 方法的区别是什么？"></a>（1） load、initialize 方法的区别是什么？</h4><ul>
-<li>调用方式<ul>
-<li>load 方法是通过函数指针直接找到方法地址进行调用</li>
-<li>initialize 是通过消息机制，进行调用</li>
+<h2 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h2><p>主要以GCD为主</p>
+<ul>
+<li>iOS开发中有多少类型的线程？分别对比</li>
+<li>GCD有哪些队列，默认提供哪些队列</li>
+<li>GCD有哪些方法api</li>
+<li>GCD主线程 &amp; 主队列的关系</li>
+<li>如何实现同步，有多少方式就说多少</li>
+<li>dispatch_once实现原理</li>
+<li>什么情况下会死锁</li>
+<li>有哪些类型的线程锁，分别介绍下作用和使用场景</li>
+<li>NSOperationQueue中的maxConcurrentOperationCount默认值</li>
+<li>NSTimer、CADisplayLink、dispatch_source_t 的优劣</li>
 </ul>
-</li>
-<li>调用时刻<ul>
-<li>load 方法在程序运行时，runtime 加载类、分类的时候，调用</li>
-<li>initialize 方法是在类第一次接收到消息时调用</li>
+<h2 id="视图-amp-图像相关"><a href="#视图-amp-图像相关" class="headerlink" title="视图&amp;图像相关"></a>视图&amp;图像相关</h2><ul>
+<li>AutoLayout的原理，性能如何</li>
+<li>UIView &amp; CALayer的区别</li>
+<li>事件响应链</li>
+<li>drawrect &amp; layoutsubviews调用时机</li>
+<li>UI的刷新原理</li>
+<li>隐式动画 &amp; 显示动画区别</li>
+<li>什么是离屏渲染</li>
+<li>imageName &amp;  imageWithContentsOfFile区别</li>
+<li>多个相同的图片，会重复加载吗</li>
+<li>图片是什么时候解码的，如何优化</li>
+<li>图片渲染怎么优化</li>
+<li>如果GPU的刷新率超过了iOS屏幕60Hz刷新率是什么现象，怎么解决</li>
 </ul>
-</li>
-<li>调用顺序<ul>
-<li>load 方法 先调用类load，在调用分类load；先编译的类，先调用；在调用子类的load之前会先调用父类的load</li>
-<li>initialize 方法 会先调用父类的initialize，再调用子类的initialize；如果子类没有实现initialize ， 会调用父类的initialize，所以父类的initialize 可能会被调用多次。</li>
+<h2 id="性能优化"><a href="#性能优化" class="headerlink" title="性能优化"></a>性能优化</h2><ul>
+<li>如何做启动优化，如何监控</li>
+<li>如何做卡顿优化，如何监控</li>
+<li>如何做耗电优化，如何监控</li>
+<li>如何做网络优化，如何监控</li>
 </ul>
-</li>
+<h2 id="开发证书"><a href="#开发证书" class="headerlink" title="开发证书"></a>开发证书</h2><ul>
+<li>苹果使用证书的目的是什么</li>
+<li>AppStore安装app时的认证流程</li>
+<li>开发者怎么在debug模式下把app安装到设备呢</li>
 </ul>
-<h3 id="7、成员变量"><a href="#7、成员变量" class="headerlink" title="7、成员变量"></a>7、成员变量</h3><h4 id="（1）添加属性"><a href="#（1）添加属性" class="headerlink" title="（1）添加属性"></a>（1）添加属性</h4><ul>
-<li>类里创建@property 属性，干了三件事，添加一个成员变量，声明set get 方法，实现 set  get 方法</li>
-<li>分类创建@property 属性，只是声明了方法<h4 id="（2）解决分类保存属性值的方案"><a href="#（2）解决分类保存属性值的方案" class="headerlink" title="（2）解决分类保存属性值的方案"></a>（2）解决分类保存属性值的方案</h4></li>
-<li>创建一个全局变量，在set 方法 和 get 方法的实现中利用 全局变量存取值<ul>
-<li>问题：如果有多个对象，不能保证每个对象都有自己的这个属性。</li>
+<h2 id="架构设计"><a href="#架构设计" class="headerlink" title="架构设计"></a>架构设计</h2><h3 id="典型源码的学习"><a href="#典型源码的学习" class="headerlink" title="典型源码的学习"></a>典型源码的学习</h3><p>只是列出一些iOS比较核心的开源库，这些库包含了很多高质量的思想，源码学习的时候一定要关注每个框架解决的核心问题是什么，还有它们的优缺点，这样才能算真正理解和吸收</p>
+<ul>
+<li>AFN</li>
+<li>SDWebImage</li>
+<li>JSPatch、Aspects(虽然一个不可用、另一个不维护，但是这两个库都很精炼巧妙，很适合学习)</li>
+<li>Weex/RN, 笔者认为这种前端和客户端紧密联系的库是必须要知道其原理的</li>
+<li>CTMediator、其他router库，这些都是常见的路由库，开发中基本上都会用到</li>
 </ul>
-</li>
-<li>全局变量使用字典，完善属性<ul>
-<li>问题：线程安全问题，因为每一个对象都可以访问这个全局变量，如果有不同线程的对象同时访问这个全局变量，确实会存在线程安全的问题。</li>
-<li>每次新添加一个属性，都要创建一个全局变量</li>
+<h3 id="架构设计-1"><a href="#架构设计-1" class="headerlink" title="架构设计"></a>架构设计</h3><ul>
+<li>手动埋点、自动化埋点、可视化埋点</li>
+<li>MVC、MVP、MVVM设计模式</li>
+<li>常见的设计模式</li>
+<li>单例的弊端</li>
+<li>常见的路由方案，以及优缺点对比</li>
+<li>如果保证项目的稳定性</li>
+<li>设计一个图片缓存框架(LRU)</li>
+<li>如何设计一个git diff</li>
+<li>设计一个线程池？画出你的架构图</li>
+<li>你的app架构是什么，有什么优缺点、为什么这么做、怎么改进</li>
 </ul>
-</li>
-<li>关联对象<ul>
-<li>给全局变量添加 static，就意味着该变量只可以在本文件内使用，这样就保证了代码的封装性</li>
-<li>关联队形并不存储在被关联的对象的内存中</li>
-<li>关联对象存储在全局统一的一个AssociationManager中</li>
-<li>设置关联对象为nil，就相当于移除关联对象</li>
-<li>removeAssociatedObjects 就是移除被传入对象的所有关联对象</li>
+<h2 id="其他问题"><a href="#其他问题" class="headerlink" title="其他问题"></a>其他问题</h2><ul>
+<li>PerformSelector &amp; NSInvocation优劣对比</li>
+<li>oc怎么实现多继承？怎么面向切面（可以参考Aspects深度解析-iOS面向切面编程）</li>
+<li>哪些bug会导致崩溃，如何防护崩溃</li>
+<li>怎么监控崩溃</li>
+<li>app的启动过程（考察LLVM编译过程、静态链接、动态链接、runtime初始化）</li>
+<li>沙盒目录的每个文件夹划分的作用</li>
+<li>简述下match-o文件结构</li>
 </ul>
-</li>
-<li>直接写出的字符串 @”name”，在iOS 中是直接放在常量区的，所以，地址值是不变的。</li>
-<li>_cmd 代表当前方法的 selector</li>
-<li>OC 实际上隐藏了两个隐式参数 给我们使用，一个是self， 一个是 _cmd</li>
-<li></li>
+<h2 id="系统基础知识"><a href="#系统基础知识" class="headerlink" title="系统基础知识"></a>系统基础知识</h2><ul>
+<li>进程和线程的区别</li>
+<li>HTTPS的握手过程</li>
+<li>什么是中间人攻击？怎么预防</li>
+<li>TCP的握手过程？为什么进行三次握手，四次挥手</li>
+<li>堆和栈区的区别？谁的占用内存空间大</li>
+<li>加密算法：对称加密算法和非对称加密算法区别</li>
+<li>常见的对称加密和非对称加密算法有哪些</li>
+<li>MD5、Sha1、Sha256区别</li>
+<li>charles抓包过程？不使用charles，4G网络如何抓包</li>
+</ul>
+<h2 id="数据结构与算法"><a href="#数据结构与算法" class="headerlink" title="数据结构与算法"></a>数据结构与算法</h2><p>对于移动开发者来说，一般不会遇到非常难的算法，大多以数据结构为主，笔者列出一些必会的算法，当然有时间了可以去LeetCode上刷刷题</p>
+<p>LeetCode地址：<a href="https://leetcode.com/" target="_blank" rel="noopener">https://leetcode.com/</a></p>
+<ul>
+<li>八大排序算法</li>
+<li>栈&amp;队列</li>
+<li>字符串处理</li>
+<li>链表</li>
+<li>二叉树相关操作</li>
+<li>深搜广搜</li>
+<li>基本的动态规划题、贪心算法、二分查找</li>
 </ul>
 <script>
         document.querySelectorAll('.github-emoji')
@@ -635,7 +686,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://doaspromised.github.io/2020/03/01/oc-ben-zhi-category/">https://doaspromised.github.io/2020/03/01/oc-ben-zhi-category/</a>
+                    <a href="https://doaspromised.github.io/2020/03/01/a-li-zi-jie-yi-tao-gao-xiao-de-ios-mian-shi-ti/">https://doaspromised.github.io/2020/03/01/a-li-zi-jie-yi-tao-gao-xiao-de-ios-mian-shi-ti/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -673,12 +724,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/OC%E6%9C%AC%E8%B4%A8/">
-                                    <span class="chip bg-color">OC本质</span>
-                                </a>
-                            
-                                <a href="/tags/Category/">
-                                    <span class="chip bg-color">Category</span>
+                                <a href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/">
+                                    <span class="chip bg-color">面试题</span>
                                 </a>
                             
                         </div>
@@ -844,9 +891,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2020/03/01/a-li-zi-jie-yi-tao-gao-xiao-de-ios-mian-shi-ti/">
                     <div class="card-image">
@@ -864,9 +912,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-03-01
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-01
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -879,6 +927,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -897,19 +946,24 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/03/01/hello-world/">
+                <a href="/2020/03/01/oc-ben-zhi-category/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
+                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="OC本质- Category">
                         
-                        <span class="card-title">Hello World</span>
+                        <span class="card-title">OC本质- Category</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hex
+                            Category1、 分类的使用场合
+模块化类
+
+2、分类的实现原理
+分类编译之后的底层结构是 struct categoty_t, 里面存储着分类的对象方法，类方法，属性，协议信息
+在程序运行的时候，runtime会将category的数
                         
                     </div>
                     <div class="publish-info">
@@ -918,11 +972,27 @@
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            jiangshoudong
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/OC%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86/" class="post-category">
+                                    OC底层原理
+                                </a>
+                            
                             
                         </span>
                     </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/OC%E6%9C%AC%E8%B4%A8/">
+                        <span class="chip bg-color">OC本质</span>
+                    </a>
+                    
+                    <a href="/tags/Category/">
+                        <span class="chip bg-color">Category</span>
+                    </a>
+                    
                 </div>
                 
             </div>
