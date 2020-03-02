@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>动态数组及优化</title>
+      <link href="/2020/03/02/expandarray/"/>
+      <url>/2020/03/02/expandarray/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Swift-动态数组及优化"><a href="#Swift-动态数组及优化" class="headerlink" title="Swift-动态数组及优化"></a>Swift-动态数组及优化</h1><p>前言：数组是一种顺序存储的线性表，所有的元素的内存地址是连续。在很多编程语言中，数组都有个致命的缺点，<strong>无法动态修改容量</strong>, 在实际开发中，我们更希望数组的容量是可以动态改变的。所以，使用Swift实现一个动态扩容数组, Swift本身数组就是动态扩容的, 为什么选择Swift呢？其实用Java, OC等语言都可以实现动态数组，选择Swift只是为了熟练下Swift语法, 思路其实是更重要的。更多的细节，看<a href="https://github.com/doaspromised/Swift-algorithm" target="_blank" rel="noopener">这里</a></p><h3 id="1、动态数组的接口设计"><a href="#1、动态数组的接口设计" class="headerlink" title="1、动态数组的接口设计"></a>1、动态数组的接口设计</h3><pre><code>     /// 数组长度    var count: Int { get }    /// 是否为空    var isEmpty: Bool { get }    /// 是否包含元素    func contains(_ element: T) -&gt; Bool {}    /// 清除所有元素    func clear() {}    /// 获取或者更改 inde 位置的元素    mutating func set(at index: Int, newElement: T) -&gt; T {}    func getElement(at index: Int) -&gt; T {}    subscript(index: Int) -&gt; T { set get }    /// 指定位置添加元素    func add(at index: Int, newElement: T) {}    /// 删除指定位置的元素    func remove(at index: Int) -&gt; T {}</code></pre><h3 id="2、动态数组的设计"><a href="#2、动态数组的设计" class="headerlink" title="2、动态数组的设计"></a>2、动态数组的设计</h3><p><img src="https://img.rruu.net/image/5e5d163d7459b" alt=""></p><p>本篇文章主要想写一下关于数组的扩容，以及如何优化增删操作。</p><h4 id="（1）两个主要私有属性：size-和-elements"><a href="#（1）两个主要私有属性：size-和-elements" class="headerlink" title="（1）两个主要私有属性：size 和 elements"></a>（1）两个主要私有属性：size 和 elements</h4><ul><li>size： 记录当前数组长度</li><li>elements： 元素容器</li></ul><h4 id="（2）添加元素"><a href="#（2）添加元素" class="headerlink" title="（2）添加元素"></a>（2）添加元素</h4><ul><li>最好的情况：在数组尾部添加，无需移动元素，复杂度为 O(1), </li><li>最坏情况：在头部添加元素，需要把所有元素往后移动一位，复杂度为 O(n)</li><li>元素移动如下图所示</li></ul><p><img src="https://img.rruu.net/image/5e5d1aacdec17" alt=""></p><h4 id="（3）移除元素"><a href="#（3）移除元素" class="headerlink" title="（3）移除元素"></a>（3）移除元素</h4><ul><li>最好的情况：删除尾部元素，无需移动元素，复杂度为O (1)</li><li>最差的情况：删除头部元素, 需要把所有元素往前移动一位，复杂度为 O(n)</li><li>元素移动如下图所示<br><img src="https://img.rruu.net/image/5e5d26745833a" alt=""></li></ul><h3 id="3、优化数组增删的复杂度"><a href="#3、优化数组增删的复杂度" class="headerlink" title="3、优化数组增删的复杂度"></a>3、优化数组增删的复杂度</h3><p>数组在头部增删时，需要把所有元素都移动, 我们尝试把复杂度降到 O(1)。主要思路是: <strong>元素不动，头部开始位置动</strong>。 添加一个start标记，start就是动态数组真正的第一个元素，每次取数据，通过 start 和 index，计算出真正的索引位置，然后 get / set 元素等操作</p><h4 id="（1）增加一个属性-start-用来标记当前头部元素的位置"><a href="#（1）增加一个属性-start-用来标记当前头部元素的位置" class="headerlink" title="（1）增加一个属性 start, 用来标记当前头部元素的位置"></a>（1）增加一个属性 start, 用来标记当前头部元素的位置</h4><pre><code>// 当前开始位置指向的索引值, 默认为0private var start = 0</code></pre><h4 id="（2）修改添加元素代码（删除逻辑相同，反操作）"><a href="#（2）修改添加元素代码（删除逻辑相同，反操作）" class="headerlink" title="（2）修改添加元素代码（删除逻辑相同，反操作）"></a>（2）修改添加元素代码（删除逻辑相同，反操作）</h4><pre><code>    /// 指定位置添加元素    /// - Parameters:    ///   - index: 位置    ///   - newElement: 元素    mutating func add(at index: Int, newElement: T) {        ensureCapacity(capacity: size + 1)        if index == size { // 尾部插入            elements[realIndex(size + 1)] = newElement        } else if index == 0 { // 头部插入            start =  start &gt; 0 ? (start - 1) :  (capacity - 1)            elements[start] = newElement        } else { // 中间插入            let middleIdx = size &gt;&gt; 1            // 尽量移动少量的元素。如果插入左半部分，将左半部分元素左移，反之亦然            if index &gt; middleIdx {                for idx in (index..&lt;size).reversed() {                    elements[idx+1] = elements[idx]                }            } else {                start = start - 1 &lt; 0 ? (capacity - 1) : (start - 1)                for idx in (0..&lt;index) {                    let realIdx = realIndex(idx)                    elements[realIdx] = elements[idx]                }            }            elements[realIndex(index)] = newElement        }        size++    }    /// 获取真正的索引    /// - Parameter index    private func realIndex(_ index: Int) -&gt; Int {        let realIdx = start + index        return (realIdx &gt;= capacity) ? (realIdx % capacity) : realIdx    }</code></pre><h5 id="分三种情况：-头部插入-尾部插入，和中间插入"><a href="#分三种情况：-头部插入-尾部插入，和中间插入" class="headerlink" title="分三种情况： 头部插入, 尾部插入，和中间插入"></a>分三种情况： 头部插入, 尾部插入，和中间插入</h5><ul><li>头部插入: 每次在头部插入，只需将start位置左移，然后把新的元素插入进来，剩余元素无需移动。<ul><li>如果start &gt; 0，每次头部插入，start 左移，新元素插入进来。</li><li>如果start为0，需要将start 左移一位，0左移就是 (capacity - 1)</li><li>依次执行，形成闭环。</li></ul></li><li>尾部插入：由于start不一定是0， 所以 size + 1不一定是要插入的真正位置，通过 realIndex 函数计算出真正的尾部位置，插入</li><li>中间插入：这种情况下，仅仅通过改动 start 位置是无法实现的，只能尽可能少量的移动元素。根据midlleIdx，判断是插入左半部分还是右半部分<ul><li>右半部分：右移插入。把要插入索引位置的元素到最后一个元素都往右移动一个位置即可</li><li>左半部分：左移插入。把要插入索引位置的前一个元素到第0个元素，都左移一位。左移，就会改动start，此时计算新的start 位置。</li></ul></li></ul><h3 id="4、如何扩容"><a href="#4、如何扩容" class="headerlink" title="4、如何扩容"></a>4、如何扩容</h3><p><img src="https://img.rruu.net/image/5e5d268f20bde" alt=""><br>当添加元素的时候，数组容量已满，此时需要扩容。把当前 elements 容器中的所有元素拷贝到容量更大的新容器, 把新容器作为数组的容器。</p><pre><code>    /// 动态扩容    /// - Parameter capacity:    private mutating func ensureCapacity(capacity: Int) {        let oldCapacity = elements.count        if capacity &gt; oldCapacity {            let oldElements = elements            // 新容量为旧容量的1.5倍            let newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1)            elements = [T](repeating: defaultValue, count: newCapacity)            // 使用内存拷贝            // memcpy(&amp;elements, &amp;oldElements, elements.count * MemoryLayout&lt;T&gt;.stride)            for (idx, _) in oldElements.enumerated() {                elements[idx] = oldElements[realIndex(idx)]            }            start = 0            self.capacity = newCapacity        }    }</code></pre><h3 id="5、结尾语"><a href="#5、结尾语" class="headerlink" title="5、结尾语"></a>5、结尾语</h3><p>数组是我们经常使用一种数据结构，iOS 开发中，无论OC 中的 NSMutableArray 还是Swift中的 Array，都可以动态扩容，而且苹果对做了很多的优化。自己用Swift简单实现一个动态扩容数组，并优化元素的移动，这个过程也是很有收获的。</p><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+      
+      
+      <categories>
+          
+          <category> Swift-algorithm </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Swift-algorithm </tag>
+            
+            <tag> 动态数组 </tag>
+            
+            <tag> 优化 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>阿里、字节：一套高效的iOS面试题</title>
       <link href="/2020/03/01/a-li-zi-jie-yi-tao-gao-xiao-de-ios-mian-shi-ti/"/>
       <url>/2020/03/01/a-li-zi-jie-yi-tao-gao-xiao-de-ios-mian-shi-ti/</url>
